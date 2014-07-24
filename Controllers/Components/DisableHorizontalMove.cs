@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Module qui bloque la vitesse horizontale d'un objet a son activation
+/// trouver d'où vient un truc pareil et le detruire, un module comme ca devrait
+/// pas exister
+/// </summary>
 public class DisableHorizontalMove : ControlledComponent {
 
 	// Use this for initialization

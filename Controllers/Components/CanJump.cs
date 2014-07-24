@@ -4,6 +4,10 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Animator))]
 
+/// <summary>
+/// Composant qui gere les regles de possibilite de saut
+/// </summary>
+// a fusionner avec le airheightcontrol ?
 public class CanJump : ControlledComponent {
 	public float deadZone = 0.001F;
 	public float jumpImpulse = 165;
@@ -48,9 +52,12 @@ public class CanJump : ControlledComponent {
 			doJump = false;
 //			DoTransition(1);
 		} else if(!Interval.InInterval(rigidbody2D.velocity.y, deadZone)){
+			// remplacer par un test de isOnGround
 			// sinon si on tombe, c'est aussi l'etat de saut qui prend le relais mais sans impulsion
 //			DoTransition(1);
 		}
+
+		// ca aussi, faudrait peut voir a le regrouper a un seul endroit, pour eviter les multiples mises a jour
 		context.SetFloat("xVelocity", rigidbody2D.velocity.x);
 		context.SetFloat("yVelocity", rigidbody2D.velocity.y);
 	}

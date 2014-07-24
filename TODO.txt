@@ -1,0 +1,24 @@
+﻿TODO list :
+
+Général :
+- commenter le code
+- modifier l'indicateur onGround pour qu'il utilise des raycast
+- intégrer les contrôles au pad
+
+
+Fonctionnalités à ajouter :
+- faire une grenade à distance fixée
+- faire une grenade qui vise un point particulier
+- faire des échelles montables
+- faire des points de spawn des ennemis
+- faire des couverts actifs
+- faire une IA de base capable de naviguer sur la carte (qui fait quoi ?)
+- faire un fading pour les transitions de rentrer dans les bâtiments
+- faire un shotgun (tire un gros coup immédiat sur une zone)
+- faire un lance flammes
+- faire un lance missile à tête chercheuse
+- faire une zone de vision pour les ennemis (?)
+
+Optimisation et modifications :
+- créer des pools d'objets pour éviter les générations à la volée
+- modifier le script des plateformes pour le rendre viable

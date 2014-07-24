@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Controleur generique qui gere la mise a jour horizontale du sprite
+/// </summary>
 public class HorizontalMove : GenericHorizontalMove {
 
 	public float maxSpeed = 2f;

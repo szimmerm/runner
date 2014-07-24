@@ -4,15 +4,23 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Animator))]
 
+/// <summary>
+/// Composant de controle de la hauteur des sauts.
+/// </summary>
 public class AirHeightControl : ControlledComponent {
 	
 	public float deadZone = 0.001F;
 
+	/// <summary>
+	/// vitesse maximum du saut quand on appuye pas sur le bouton. Influe sur la
+	/// hauteur minimale du saut
+	/// </summary>
 	public float lowSpeed;
 
 //	private bool doJump = false;
 //	private bool isGrounded = false;
-	private float lastYSpeed = 1;
+	private float lastYSpeed = 1; // du a une mauvaise implementation du test au sol
+									// devrait disparaitre
 	
 	public Vector2 velocity;
 	
@@ -44,7 +52,7 @@ public class AirHeightControl : ControlledComponent {
 	}
 	
 	void FixedUpdate(){
-		if (lastYSpeed < 0 && rigidbody2D.velocity.y >= -deadZone){
+		if (isOnGround()){
 			// on vient d'atterir au sol ; on change donc d'etat
 //			DoTransition("fall");
 			animator.SetBool("grounded", true);
@@ -58,5 +66,12 @@ public class AirHeightControl : ControlledComponent {
 			}
 			lastYSpeed = rigidbody2D.velocity.y;
 		}
+	}
+
+	/// <summary>
+	/// Teste si l'element est sur le sol ou pas.
+	/// </summary>
+	void isOnGround(){
+		return ((lastYSpeed < 0) && (rigidbody2D.velocity.y >= -deadZone));
 	}
 }

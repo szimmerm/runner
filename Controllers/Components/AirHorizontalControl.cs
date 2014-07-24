@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Composant de controle du personnage quand il est en l'air.
+/// Defini son degre de liberte horizontal
+/// </summary>
 public class AirHorizontalControl : GenericHorizontalMove {
 
 	
@@ -23,6 +27,7 @@ public class AirHorizontalControl : GenericHorizontalMove {
 	}
 	
 	void FixedUpdate(){
+		// en l'air on est bloque par la vitesse maximale
 		//if (Mathf.Sign (direction) != jumpDirection){
 			AccelerateWithCap(airSlowing, maxSpeed);
 		//}

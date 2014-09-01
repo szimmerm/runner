@@ -4,6 +4,9 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Animator))]
 
+/// <summary>
+/// Etat de controle d'un personnage au sol (utile ou ?)
+/// </summary>
 public class OnGroundState : ControlledComponent {
 	public float deadZone = 0.001F;
 	public float jumpImpulse;

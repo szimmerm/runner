@@ -5,14 +5,14 @@ using System.Collections;
 /// Composant de controle du personnage quand il est en l'air.
 /// Defini son degre de liberte horizontal
 /// </summary>
-public class AirHorizontalControl : GenericHorizontalMove {
+public class AirHorizontalControl : GenericMove {
 
 	
 	public float airSlowing = 0.2f;
 	public float maxSpeed = 2f;
 	private float jumpDirection;
 	
-	// Use this for initialization
+	// Use this for initialization	
 	void Start () {
 		
 	}

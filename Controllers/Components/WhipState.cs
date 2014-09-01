@@ -3,6 +3,9 @@ using System.Collections;
 
 [RequireComponent (typeof(Animator))]
 
+/// <summary>
+/// Etat de controle du fouet (utile ou ?)
+/// </summary>
 public class WhipState : ControlledComponent {
 
 	// animation

@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Controleur generique qui gere la mise a jour horizontale du sprite
 /// </summary>
-public class HorizontalMove : GenericHorizontalMove {
+public class HorizontalMove : GenericMove {
 
 	public float maxSpeed = 2f;
 	public float acceleration = 20f;

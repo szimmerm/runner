@@ -37,13 +37,13 @@ public class DameMachine : MonoBehaviour {
 		// creation des etats
 		BaseState ground = EnablingStateBuild("ground", new ControlledComponent[]{
 			GetComponent<CanJump>(), 
-		    GetComponent<HorizontalMove>(),
+//		    GetComponent<HorizontalMove>(),
 		    GetComponent<WhipState>()
 			});
 
 		BaseState airDirected = EnablingStateBuild("airDirected", new ControlledComponent[]{
 			GetComponent<AirHeightControl>(),
-			GetComponent<AirHorizontalControl>(),
+//			GetComponent<AirHorizontalControl>(),
 			GetComponent<WhipState>()
 			});
 	
@@ -52,13 +52,13 @@ public class DameMachine : MonoBehaviour {
 			});
 
 		BaseState airNeutral = EnablingStateBuild("airNeutral", new ControlledComponent[]{
-			GetComponent<HorizontalMove>(),
+//			GetComponent<HorizontalMove>(),
 			GetComponent<AirHeightControl>(),
 			GetComponent<WhipState>()
 			});
 
 		BaseState swimming = EnablingStateBuild ("swimming", new ControlledComponent[]{
-			GetComponent<HorizontalMove>(),
+//			GetComponent<HorizontalMove>(),
 			GetComponent<CanJump>()
 			});
 

@@ -1,11 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Gestion de l'arme a feu
+/// </summary>
 public class FireScript : MonoBehaviour {
+	/// <summary>
+	/// Projectile tire
+	/// </summary>
 	public Transform bullet;
 
-	private float rateOfFire = 10;
-	private bool button;
+	/// <summary>
+	/// Vitesse de tir
+	/// </summary>
+	public float rateOfFire = 10;
+
+	/// <summary>
+	/// Refroidissement courant de l'arme
+	/// </summary>
 	private float currentCooldown = 0;
 
 	// Use this for initialization
@@ -18,20 +30,31 @@ public class FireScript : MonoBehaviour {
 		if (currentCooldown > 0) {
 			currentCooldown -= Time.deltaTime;
 		}
+	}
 
-		button = Input.GetButton ("Fire");
-		if (button && currentCooldown <= 0) {
-			Shoot();
+	/// <summary>
+	/// Fonction de tir
+	/// </summary>
+	public void Fire() {
+		if (currentCooldown <= 0) {
+			SpawnShoot();
 			currentCooldown = 1/rateOfFire;
 		}
 	}
 
-	void Shoot() {
+	/// <summary>
+	/// Instancie le tir
+	/// </summary>
+	private void SpawnShoot() {
 		Transform bul = (Transform) Instantiate(bullet);
+
+		// les tirs ne partent pas pile du canon pour faire un effet de dispersion
 		float modif = Random.value * 0.3f - 0.15f;
 		Vector3 position = transform.position;
 		position.y += modif;
 		bul.position = position;
+
+		// duree de vie du tir
 		Destroy(bul.gameObject, 1.0f);
 	}
 }

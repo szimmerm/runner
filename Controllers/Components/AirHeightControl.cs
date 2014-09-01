@@ -44,8 +44,6 @@ public class AirHeightControl : ControlledComponent {
 		jumpPushed = true;
 	}
 	
-	// Use this for initialization
-	
 	// Update is called once per frame
 	void Update () {
 		jumpPushed = Input.GetButton ("Jump");
@@ -71,7 +69,7 @@ public class AirHeightControl : ControlledComponent {
 	/// <summary>
 	/// Teste si l'element est sur le sol ou pas.
 	/// </summary>
-	void isOnGround(){
+	bool isOnGround(){
 		return ((lastYSpeed < 0) && (rigidbody2D.velocity.y >= -deadZone));
 	}
 }

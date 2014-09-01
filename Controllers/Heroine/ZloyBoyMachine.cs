@@ -5,6 +5,9 @@ using System.Collections;
 [RequireComponent (typeof(AirHeightControl))]
 [RequireComponent (typeof(CanJump))]
 
+/// <summary>
+/// Description de l'automate de controle du personnage joueur
+/// </summary>
 public class ZloyBoyMachine : MonoBehaviour {
 	
 	public string activeStateName = "";
@@ -31,7 +34,7 @@ public class ZloyBoyMachine : MonoBehaviour {
 		
 		// creation des etats
 		BaseState ground = EnablingStateBuild("ground", new ControlledComponent[]{
-			GetComponent<HorizontalMove>(),
+//			GetComponent<HorizontalMove>(),
 			GetComponent<AirHeightControl>(),
 			GetComponent<CanJump>()
 		});
@@ -54,7 +57,12 @@ public class ZloyBoyMachine : MonoBehaviour {
 		activeStateName = activeState.name;
 	}
 	
-	
+	/// <summary>
+	/// Construction d'un etat lie a plusieurs composants
+	/// </summary>
+	/// <returns>L'etat fabrique.</returns>
+	/// <param name="name">Nom de l'etat.</param>
+	/// <param name="components">Composants utilises par l'etat.</param>
 	public BaseState EnablingStateBuild(string name, ControlledComponent[] components){
 		EnablingState state = new EnablingState(name, context, controller);
 		//		EnablingState state = new EnablingState();

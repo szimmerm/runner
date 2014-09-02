@@ -209,17 +209,17 @@ public class EnablingState : BaseState{
 	/// <summary>
 	/// Les composants controles par l'etat.
 	/// </summary>
-	public List<ControlledComponent> components = new List<ControlledComponent>();
+	public List<MonoBehaviour> components = new List<MonoBehaviour>();
 	
 	public EnablingState(string nam, TestContext ctxt, StateManager<BaseState, Transition> control) : base(nam, ctxt, control){
-		components = new List<ControlledComponent>();
+		components = new List<MonoBehaviour>();
 	}	
 
 	/// <summary>
 	/// rajoute le composant <paramref name="component"/>  sous le controle de l'etat
 	///</summary>	
 	/// <param name="component">Composant a mettre sous le controle de l'etat.</param>
-	public void AddComponent(ControlledComponent component){
+	public void AddComponent(MonoBehaviour component){
 		//		Debug.Log ("component added : "+component.ToString ());
 		components.Add (component);
 	}
@@ -229,7 +229,7 @@ public class EnablingState : BaseState{
 	/// </summary>
 	public override void OnStateExit(){
 		base.OnStateExit ();
-		foreach(ControlledComponent component in components){
+		foreach(MonoBehaviour component in components){
 			component.enabled = false;
 			
 		}

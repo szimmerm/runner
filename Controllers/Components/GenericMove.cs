@@ -6,7 +6,7 @@ using System.Collections;
 /// <summary>
 /// Module contenant des operations generiques sur la manipulation du rigidbody.
 /// </summary>
-public class GenericMove : MonoBehaviour {
+public class GenericMove : ControlledComponent {
 
 	/// <summary>
 	/// Direction du mouvement. Normalement controle par l'automate de l'entite

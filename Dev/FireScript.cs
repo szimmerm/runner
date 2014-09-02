@@ -33,7 +33,7 @@ public class FireScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Fonction de tir
+	/// Effectue les tests de validite de creation du tir puis le cree
 	/// </summary>
 	public void Fire() {
 		if (currentCooldown <= 0) {

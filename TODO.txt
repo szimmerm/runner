@@ -18,6 +18,7 @@ Fonctionnalités à ajouter :
 - faire un lance flammes
 - faire un lance missile à tête chercheuse
 - faire une zone de vision pour les ennemis (?)
+- afficher les zones de tiling : QUASI FINI
 
 Optimisation et modifications :
 - créer des pools d'objets pour éviter les générations à la volée

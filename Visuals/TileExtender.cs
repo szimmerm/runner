@@ -80,7 +80,7 @@ public class TileExtender : MonoBehaviour {
 	private void DrawTextureAt(Vector3 pos){
 		Sprite sprite = tile.gameObject.GetComponent<SpriteRenderer>().sprite;
 		Texture2D texture = sprite.texture;
-		Rect rect = new Rect(pos.x, pos.y, 1, 1);
+		Rect rect = new Rect(Mathf.Floor (pos.x), Mathf.Floor (pos.y), 1, 1);
 		Gizmos.DrawGUITexture (rect, texture);
 	}
 }

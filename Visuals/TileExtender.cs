@@ -41,9 +41,6 @@ public class TileExtender : MonoBehaviour {
 		Vector3 end = transform.position + (transform.localScale / 2);
 		Vector3 offset = new Vector3(0.5F, 0.5F, 0F);
 
-		Debug.Log ("start : "+start);
-		Debug.Log ("end : "+end);
-
 		for(float xPos = Mathf.Round (start.x); xPos < Mathf.Round(end.x) ; xPos ++)
 			for (float yPos = Mathf.Round (start.y) ; yPos < Mathf.Round(end.y) ; yPos++) {
 				drawer(new Vector3(xPos, yPos, transform.position.z), offset);

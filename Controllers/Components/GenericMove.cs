@@ -43,4 +43,21 @@ public class GenericMove : ControlledComponent {
 	public void UpdateAnimator(){
 //		animator.SetFloat ("horizontal speed", rigidbody2D.velocity.x);
 	}
+
+	/// <summary>
+	/// Donne une impulsion de saut (vers le haut)
+	/// </summary>
+	/// <param name="force">Force.</param>
+	public void JumpImpulse(float force){
+		rigidbody2D.AddForce (new Vector3(0F, force, 0F));
+	}
+
+	/// <summary>
+	/// Limitateur de la vitesse verticale vers le haut
+	/// </summary>
+	/// <param name="ySpeedCap">Vitesse fixee maximale.</param>
+	public void CapJumpSpeed(float ySpeedCap){
+		float ySpeed = Mathf.Min (ySpeedCap, rigidbody2D.velocity.y);
+		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, ySpeed);
+	}
 }

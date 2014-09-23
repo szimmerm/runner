@@ -10,7 +10,7 @@ public class PlayerController : GenericMove {
 	public float maxSpeed = 2f;
 	public float acceleration = 20f;
 	public float horizontalFriction = 20f;
-	public bool onGround = true;
+	public bool onGround = false;
 
 	public Transform groundTrigger;
 
@@ -53,7 +53,6 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	protected void UpdateGround(){
 		onGround = IsOnGround();
-		Debug.Log ("retour du test au sol : "+onGround);
 	}
 	
 }

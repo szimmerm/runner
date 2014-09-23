@@ -7,8 +7,6 @@ public class TileExtender : MonoBehaviour {
 	/// The tile.
 	/// </summary>
 	public Transform tile;
-	private bool drawn = false;
-	private SpriteRenderer rendereur;
 
 	// type des fonctions d'affichage, pour gerer le tiling uniformement
 	private delegate void DrawFunc(Vector3 pos, Vector3 offset);
@@ -50,13 +48,7 @@ public class TileExtender : MonoBehaviour {
 
 	// affichage des tiles dans l'editeur
 	private void OnDrawGizmos(){
-		if(!drawn){
-			rendereur = gameObject.GetComponent<SpriteRenderer>();
-//			drawn = true;
-		}
-//		FillWithChildren(rendereur.bounds.min, rendereur.bounds, DrawTextureAt);
 		TileFilling(DrawTextureAt);
-		drawn = true;
 	}
 
 	/// <summary>
@@ -67,10 +59,10 @@ public class TileExtender : MonoBehaviour {
 		// on decale l'instantiation avec sa largeur, pour contrebalancer la difference
 		// de comportement entre Instantiate et DrawGUITexture
 		pos = pos + offset;
-		Debug.Log ("instanciation a "+pos);
 		Transform newTile = Instantiate(tile) as Transform;
 		newTile.position = pos;
 		newTile.transform.parent = this.transform;
+		newTile.gameObject.layer = gameObject.layer;
 	}
 
 	/// <summary>

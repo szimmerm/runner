@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// Logique du personnage au sol
-/// </summary>
-public class ZloyGround : PlayerController {
-
+public class AirZloy : PlayerController {
+	
 	private float deadZone = 0.001F;
-
+	
 	private FireScript CurrentWeapon;
 	private bool firing;
-	public float jumpImpulse;
-
+	public float jumpCap;
+	
 	// Use this for initialization
 	void Start () {
 		// on recupere la premiere arme activee 
@@ -24,17 +21,19 @@ public class ZloyGround : PlayerController {
 		if(Input.GetAxis ("Fire") != 0)
 			CurrentWeapon.Fire ();
 	}
-
+	
 	void FixedUpdate(){
 		UpdateGround();
 		ApplyHorizontalMove();
 		
 		// gestion de la hauteur du saut
 		float jump = Input.GetAxis ("Jump");
-		if(onGround && jump != 0){
-			JumpImpulse(jumpImpulse);
-		}
-		context.SetBool ("onGround", onGround);
+		if (!onGround && Interval.InInterval (jump, deadZone))
+			CapJumpSpeed(jumpCap);
+		// on ne modifie onGround que si on ne monte pas pour eviter
+		// les multiples sauts lors de l'ascension
+		if(rigidbody2D.velocity.y >= 0)
+			context.SetBool ("onGround", onGround);
 	}
-
+	
 }

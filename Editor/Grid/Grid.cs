@@ -3,19 +3,8 @@ using System.Collections;
 
 public class Grid : MonoBehaviour {
 
-	public float width = 32.0f;
-	public float height = 32.0f;
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public float width = 1.0f;
+	public float height = 1.0f;
 
 	void OnDrawGizmos(){
 		if (height == 0f || width == 0f){

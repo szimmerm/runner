@@ -11,6 +11,7 @@ public class PlayerController : GenericMove {
 	public float acceleration = 20f;
 	public float horizontalFriction = 20f;
 	public bool onGround = false;
+	public bool climbing = false;
 
 	public Transform groundTrigger;
 
@@ -42,7 +43,7 @@ public class PlayerController : GenericMove {
 		RaycastHit2D hit = Physics2D.Linecast (
 			transform.position 	
 			,groundTrigger.transform.position
-			, 1 << LayerMask.NameToLayer("Decors") 
+			, 1 << LayerMask.NameToLayer("ground") 
 		);
 		if(hit.collider != null) return true;
 		else return false;
@@ -53,6 +54,10 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	protected void UpdateGround(){
 		onGround = IsOnGround();
+	}
+
+	protected void UpdateClimbing(){
+		climbing = (Input.GetAxis ("Vertical") > 0);
 	}
 	
 }

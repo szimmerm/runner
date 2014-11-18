@@ -2,14 +2,12 @@
 
 Général :
 - commenter le code
-- intégrer les contrôles au pad
-- centraliser tout les tests d'etats, pour pas avoir à 7000 endroits une mise a jour de la vitesse, un test de être au sol différent etc
 - faire un seul module qui contient les primitives génériques pour gérer le déplacement d'un objet
 ---> ameliorer generichorizontalmove pour qu'il serve a ca
 - trouver d'ou vient DisableHorizontalMove et le supprimer pour remonter tout sur le module precedent
 
 Fonctionnalités à ajouter :
-- faire des échelles montables
+- faire des échelles montables : EN COURS
 - faire des points de spawn des ennemis
 - faire des couverts actifs
 - faire une IA de base capable de naviguer sur la carte (qui fait quoi ?)

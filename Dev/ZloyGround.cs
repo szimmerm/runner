@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class ZloyGround : PlayerController {
 
-	private float deadZone = 0.001F;
+//	private float deadZone = 0.001F;
 
 	private FireScript CurrentWeapon;
 	private bool firing;
@@ -23,6 +23,8 @@ public class ZloyGround : PlayerController {
 		SetDirection();
 		if(Input.GetAxis ("Fire") != 0)
 			CurrentWeapon.Fire ();
+		UpdateClimbing();
+		context.SetBool ("climbing", climbing);
 	}
 
 	void FixedUpdate(){
@@ -35,6 +37,18 @@ public class ZloyGround : PlayerController {
 			JumpImpulse(jumpImpulse);
 		}
 		context.SetBool ("onGround", onGround);
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag == "ladder"){
+			context.SetBool ("onLadder", true);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.tag == "ladder"){
+			context.SetBool ("onladder", false);
+		}
 	}
 
 }

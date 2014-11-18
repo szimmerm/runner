@@ -6,21 +6,24 @@ using System.Collections;
 
 public class PlayerAutomaton : AutomatonBuilder {
 	public override void BuildStates (){
-		System.Predicate<TestContext> test;
-
 		AddState("ground", GetComponent<ZloyGround>());
 		AddState("air", GetComponent<AirZloy>());
+		AddState("ladder", GetComponent<ZloyLadder>());
 
-		test = (ctxt) => {return !(ctxt.GetBool ("onGround"));};
-		AddSimpleTransition("ground", "groundToAir", "air", test);
-
-		test = (ctxt) => {return ctxt.GetBool ("onGround");};
-		AddSimpleTransition("air", "airToGround", "ground", test);
 
 		SetBaseState("ground");
 	}
 	
 	public override void BuildTransitions() {
+		System.Predicate<TestContext> test;
 		
+		test = (ctxt) => {return !(ctxt.GetBool ("onGround"));};
+		AddSimpleTransition("ground", "groundToAir", "air", test);
+		
+		test = (ctxt) => {return ctxt.GetBool ("onGround");};
+		AddSimpleTransition("air", "airToGround", "ground", test);
+
+		test = (ctxt) => {return ctxt.GetBool ("onLadder") && ctxt.GetBool ("climbing");};
+		AddSimpleTransition("ground", "groundToLadder", "ladder", test);
 	}
 }

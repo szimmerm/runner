@@ -32,8 +32,10 @@ public class AirZloy : PlayerController {
 			CapJumpSpeed(jumpCap);
 		// on ne modifie onGround que si on ne monte pas pour eviter
 		// les multiples sauts lors de l'ascension
-		if(rigidbody2D.velocity.y >= 0)
+		if(rigidbody2D.velocity.y >= 0) {
 			context.SetBool ("onGround", onGround);
+			Debug.Log("coucou on ground : "+onGround);
+		}
 	}
 	
 }

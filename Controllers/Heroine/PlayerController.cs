@@ -33,6 +33,7 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	public void SetDirection() {
 		direction = Input.GetAxis ("Horizontal");	
+		context.SetFloat ("direction", direction);
 	}
 
 	/// <summary>
@@ -56,8 +57,8 @@ public class PlayerController : GenericMove {
 		onGround = IsOnGround();
 	}
 
-	protected void UpdateClimbing(){
-		climbing = (Input.GetAxis ("Vertical") > 0);
+	protected void SetVertical(){
+		context.SetFloat ("vertical", Input.GetAxis ("Vertical"));
 	}
 	
 }

@@ -5,12 +5,11 @@ using System.Collections;
 [RequireComponent (typeof(AirZloy))]
 
 public class PlayerAutomaton : AutomatonBuilder {
+	
 	public override void BuildStates (){
 		AddState("ground", GetComponent<ZloyGround>());
 		AddState("air", GetComponent<AirZloy>());
 		AddState("ladder", GetComponent<ZloyLadder>());
-
-
 		SetBaseState("ground");
 	}
 	
@@ -23,7 +22,14 @@ public class PlayerAutomaton : AutomatonBuilder {
 		test = (ctxt) => {return ctxt.GetBool ("onGround");};
 		AddSimpleTransition("air", "airToGround", "ground", test);
 
-		test = (ctxt) => {return ctxt.GetBool ("onLadder") && ctxt.GetBool ("climbing");};
+		test = (ctxt) => {return (ctxt.GetFloat ("ladderValue") == 2) && ctxt.GetFloat ("vertical") != 0;};
 		AddSimpleTransition("ground", "groundToLadder", "ladder", test);
+
+		test = (ctxt) => {return (ctxt.GetFloat ("ladderValue") == 0);};
+		AddSimpleTransition("ladder", "ladderToAir", "air", test);
+	}
+
+	public override void BuildContext(TestContext ctxt) {
+		context.SetFloat("ladderValue", 0);
 	}
 }

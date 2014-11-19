@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 /// <summary>
 /// Contexte contenant toutes les valeurs des variables internes d'un automate
 /// </summary>
+[System.Serializable]
 public class TestContext{
 
 	/// <summary>

@@ -23,8 +23,7 @@ public class ZloyGround : PlayerController {
 		SetDirection();
 		if(Input.GetAxis ("Fire") != 0)
 			CurrentWeapon.Fire ();
-		UpdateClimbing();
-		context.SetBool ("climbing", climbing);
+		SetVertical();
 	}
 
 	void FixedUpdate(){
@@ -40,14 +39,21 @@ public class ZloyGround : PlayerController {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "ladder"){
-			context.SetBool ("onLadder", true);
+		if (other.tag == "ladderTrigger"){
+			float ladders = context.GetFloat ("ladderValue") + 1;
+			context.SetFloat ("ladderValue", ladders);
+		}
+		else if (other.tag == "ladderTop"){
+
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-		if (other.tag == "ladder"){
-			context.SetBool ("onladder", false);
+		if (other.tag == "ladderTrigger"){
+			float ladders = context.GetFloat("ladderValue") - 1;
+			context.SetFloat ("ladderValue", ladders);
+		}
+		else if (other.tag == "ladderTop") {
 		}
 	}
 

@@ -31,6 +31,10 @@ public class AutomatonBuilder : MonoBehaviour {
 	public virtual void BuildTransitions() {
 		
 	}
+
+	public virtual void BuildContext(TestContext ctxt){
+
+	}
 	
 	/// <summary>
 	/// Defini l'etat de depart de l'automate.
@@ -108,6 +112,8 @@ public class AutomatonBuilder : MonoBehaviour {
 
 		// creation des transitions
 		BuildTransitions();
+
+		// creation des valeurs par defaut du contexte
 	}
 	
 	// Use this for initialization

@@ -242,7 +242,7 @@ public class EnablingState : BaseState{
 		context.ResetTriggers();
 		foreach(ControlledComponent component in components){
 			//			Debug.Log ("Enabling : "+component);
-			component.context = context;
+//			component.context = context;
 			component.enabled = true;
 		}	
 	}

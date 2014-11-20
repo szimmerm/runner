@@ -2,16 +2,12 @@
 using System.Collections;
 
 [RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent (typeof(ObjectValues))]
 
 /// <summary>
 /// Module contenant des operations generiques sur la manipulation du rigidbody.
 /// </summary>
 public class GenericMove : ControlledComponent {
-
-	/// <summary>
-	/// Direction du mouvement. Normalement controle par l'automate de l'entite
-	/// </summary>
-	protected float direction = 0;
 
 	/// <summary>
 	/// Fait accelerer un rigidbody en fixant une vitesse maximale.
@@ -20,7 +16,7 @@ public class GenericMove : ControlledComponent {
 	/// <param name="cap">valeur absolue de la vitesse maximale.</param>
 	public void AccelerateWithCap(float acceleration, float cap){
 		float previousSpeed = rigidbody2D.velocity.x;
-		float newSpeed = Interval.PutInInterval (previousSpeed + (direction*acceleration), cap);
+		float newSpeed = Interval.PutInInterval (previousSpeed + (values.direction*acceleration), cap);
 		rigidbody2D.velocity = new Vector2(newSpeed, rigidbody2D.velocity.y);
 	}
 

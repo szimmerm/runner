@@ -32,16 +32,16 @@ public class ZloyGround : PlayerController {
 		
 		// gestion de la hauteur du saut
 		float jump = Input.GetAxis ("Jump");
-		if(onGround && jump != 0){
+		if(values.onGround && jump != 0){
 			JumpImpulse(jumpImpulse);
 		}
-		context.SetBool ("onGround", onGround);
+		values.context.SetBool ("onGround", values.onGround);
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "ladderTrigger"){
-			float ladders = context.GetFloat ("ladderValue") + 1;
-			context.SetFloat ("ladderValue", ladders);
+			float ladders = values.context.GetFloat ("ladderValue") + 1;
+			values.context.SetFloat ("ladderValue", ladders);
 		}
 		else if (other.tag == "ladderTop"){
 
@@ -50,8 +50,8 @@ public class ZloyGround : PlayerController {
 
 	void OnTriggerExit2D(Collider2D other){
 		if (other.tag == "ladderTrigger"){
-			float ladders = context.GetFloat("ladderValue") - 1;
-			context.SetFloat ("ladderValue", ladders);
+			float ladders = values.context.GetFloat("ladderValue") - 1;
+			values.context.SetFloat ("ladderValue", ladders);
 		}
 		else if (other.tag == "ladderTop") {
 		}

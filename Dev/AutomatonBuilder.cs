@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent (typeof(ObjectValues))]
 /// <summary>
 /// Classe de base fabriquant automatiquement l'automate de controle d'un element a partir de sa description
 /// </summary>
@@ -105,7 +106,7 @@ public class AutomatonBuilder : MonoBehaviour {
 		controller = new StateManager<BaseState, Transition>();
 		
 		// creation du context
-		context = new TestContext();
+		context = GetComponent<ObjectValues>().context;
 		
 		// creation des etats
 		BuildStates();

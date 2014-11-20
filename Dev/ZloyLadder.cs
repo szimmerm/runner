@@ -30,17 +30,17 @@ public class ZloyLadder : PlayerController {
 	}
 
 	void FixedUpdate(){
-		float trueDirection = direction;
+		float trueDirection = values.direction;
 
 		// on triche un peu pour simuler le mouvement vertical ; on utilise un mouvement horizontal renverse
-		direction = Input.GetAxis ("Vertical");	
-		if (direction !=0) {
+		values.direction = Input.GetAxis ("Vertical");	
+		if (values.direction !=0) {
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.y, 0);
 			ApplyHorizontalMove();
 			rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.x);
 		}
 		else rigidbody2D.velocity = new Vector2(0, 0);
 
-		direction = trueDirection;
+		values.direction = trueDirection;
 	}
 }

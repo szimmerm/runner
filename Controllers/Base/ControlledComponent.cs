@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+[RequireComponent (typeof(ObjectValues))]
 /// <summary>
 /// Classe de base pour les composants geres par des automates de controle
 /// </summary>
 public class ControlledComponent : MonoBehaviour {
-
 	/// <summary>
-	/// Contexte comprennant les variables internes de l'automate de controle
+	/// valeurs internes de l'objet controle
 	/// </summary>
-	public TestContext context;
-
-	public virtual void Awake(){
+	protected ObjectValues values;
+	
+	void Awake() {
+		values = GetComponent<ObjectValues>();
 		enabled = false;
 	}
 

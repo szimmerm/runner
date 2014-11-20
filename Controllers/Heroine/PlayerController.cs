@@ -6,24 +6,23 @@ using System.Collections;
 /// </summary>
 public class PlayerController : GenericMove {
 
-	// valeurs visibles pour l'utilisateur
-	public float maxSpeed = 2f;
-	public float acceleration = 20f;
-	public float horizontalFriction = 20f;
-	public bool onGround = false;
-	public bool climbing = false;
+	new protected PlayerValues values; // valeurs internes du personnage (verifier syntaxe et comportement ?)
+										// on se permet le hiding ici parce que values n'est qu'un cast du values utilise par
+										// controlled component
 
-	public Transform groundTrigger;
+	void Awake() {
+		values = GetComponent<PlayerValues>();
+	}
 
 	/// <summary>
 	/// Resolution du mouvement horizontal
 	/// </summary>
 	public void ApplyHorizontalMove(){
-		if (direction != 0){
-			AccelerateWithCap(acceleration, maxSpeed);
+		if (values.direction != 0){
+			AccelerateWithCap(values.acceleration, values.maxSpeed);
 		}
 		else{
-			DecreaseSpeed(horizontalFriction);
+			DecreaseSpeed(values.horizontalFriction);
 		}
 		UpdateAnimator();
 	}
@@ -32,8 +31,8 @@ public class PlayerController : GenericMove {
 	/// Met a jour la valeur de la direction du mouvement
 	/// </summary>
 	public void SetDirection() {
-		direction = Input.GetAxis ("Horizontal");	
-		context.SetFloat ("direction", direction);
+		values.direction = Input.GetAxis ("Horizontal");	
+		values.context.SetFloat ("direction", values.direction);
 	}
 
 	/// <summary>
@@ -43,7 +42,7 @@ public class PlayerController : GenericMove {
 	public bool IsOnGround() {
 		RaycastHit2D hit = Physics2D.Linecast (
 			transform.position 	
-			,groundTrigger.transform.position
+			,values.groundTrigger.transform.position
 			, 1 << LayerMask.NameToLayer("ground") 
 		);
 		if(hit.collider != null) return true;
@@ -54,11 +53,10 @@ public class PlayerController : GenericMove {
 	/// Met a jour la valeur du sol
 	/// </summary>
 	protected void UpdateGround(){
-		onGround = IsOnGround();
+		values.onGround = IsOnGround();
 	}
 
 	protected void SetVertical(){
-		context.SetFloat ("vertical", Input.GetAxis ("Vertical"));
+		values.context.SetFloat ("vertical", Input.GetAxis ("Vertical"));
 	}
-	
 }

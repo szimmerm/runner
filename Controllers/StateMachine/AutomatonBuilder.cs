@@ -115,6 +115,7 @@ public class AutomatonBuilder : MonoBehaviour {
 		BuildTransitions();
 
 		// creation des valeurs par defaut du contexte
+		BuildContext (context);
 	}
 	
 	// Use this for initialization

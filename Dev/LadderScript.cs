@@ -35,7 +35,7 @@ public class LadderScript : MonoBehaviour {
 
 	private void buildTopTrigger(Vector2 offset){
 		Vector2 boxSize = new Vector2(0.1f, 0.1f);
-		
+
 		Transform trigger = (Transform) Instantiate(Trigger);
 		trigger.position = transform.position;
 		BoxCollider2D box = trigger.GetComponent<BoxCollider2D>();

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 [RequireComponent (typeof(ObjectValues))]
 /// <summary>
 /// Classe de base pour les composants geres par des automates de controle
@@ -12,7 +11,7 @@ public class ControlledComponent : MonoBehaviour {
 	/// </summary>
 	protected ObjectValues values;
 	
-	void Awake() {
+	virtual protected void Awake() {
 		values = GetComponent<ObjectValues>();
 		enabled = false;
 	}
@@ -21,7 +20,6 @@ public class ControlledComponent : MonoBehaviour {
 	void Start () {
 //		machine.AddState (this);
 	}
-
 /*
 	public void DoTransition(string s){
 		if (controller != null){

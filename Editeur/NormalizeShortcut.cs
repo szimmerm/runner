@@ -9,7 +9,6 @@ public class NormalizeShortcut : MonoBehaviour {
 
 	[MenuItem ("Zim Tools/Normalize Transform %g")]
 	public static void NormalizeCall(){
-		Debug.Log ("trop l'seum");
 		GameObject obj = Selection.activeGameObject;
 		if (obj != null)
 			NormalizeObject(obj.transform);

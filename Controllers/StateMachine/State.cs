@@ -241,7 +241,6 @@ public class EnablingState : BaseState{
 	public override void OnStateEnter(){
 		context.ResetTriggers();
 		foreach(ControlledComponent component in components){
-			//			Debug.Log ("Enabling : "+component);
 //			component.context = context;
 			component.enabled = true;
 		}	

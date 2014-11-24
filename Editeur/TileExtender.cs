@@ -72,10 +72,12 @@ public class TileExtender : MonoBehaviour {
 	private void DrawTextureAt(Vector3 pos, Vector3 offset){
 		// DrawGUITexture instancie a partir du coin alors que Instantiate a partir du centre du transform
 		// on oublie donc l'offset
-		Sprite sprite = tile.gameObject.GetComponent<SpriteRenderer>().sprite;
-		Texture2D texture = sprite.texture;
-//		Rect rect = new Rect(pos.x, pos.y, 1, 1);
-		Rect rect = new Rect(pos.x, pos.y, 1.0F, 1.0F);
-		Gizmos.DrawGUITexture (rect, texture);
+		if (tile != null) {
+				Sprite sprite = tile.gameObject.GetComponent<SpriteRenderer> ().sprite;
+				Texture2D texture = sprite.texture;
+//			Rect rect = new Rect(pos.x, pos.y, 1, 1);
+				Rect rect = new Rect (pos.x, pos.y, 1.0F, 1.0F);
+				Gizmos.DrawGUITexture (rect, texture);
+			}
 	}
 }

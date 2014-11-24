@@ -13,5 +13,37 @@ public class PlayerValues : ObjectValues {
 	public bool onGround = false; // objet au sol ?
 	public bool climbing = false; // objet grimpant ? (utile ? devrait etre integre a l'automate d'etat)
 
-	public Transform groundTrigger;
+	public Transform groundTriggerPrefab;
+
+	private Transform groundTrigger;
+
+	void Awake() {
+		groundTrigger = (Transform)Instantiate (groundTriggerPrefab);	
+		groundTrigger.parent = transform;
+		groundTrigger.localPosition = new Vector3 (0f, -0.75f, 0f);
+	}
+
+	public Transform GetGroundTrigger(){
+		return groundTrigger;
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag == "ladderTrigger") {
+			float ladders = context.GetFloat ("ladderValue") + 1;
+			context.SetFloat ("ladderValue", ladders);
+		} else if (other.tag == "ladderTop") {
+			float ladders = context.GetFloat ("ladderTopValue") + 1;
+			context.SetFloat ("ladderTopValue", ladders);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.tag == "ladderTrigger") {
+			float ladders = context.GetFloat ("ladderValue") - 1;
+			context.SetFloat ("ladderValue", ladders);
+		} else if (other.tag == "ladderTop") {
+			float ladders = context.GetFloat ("ladderTopValue") - 1;
+			context.SetFloat ("ladderTopValue", ladders);
+		}
+	}
 }

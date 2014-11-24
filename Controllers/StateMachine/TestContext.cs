@@ -23,7 +23,7 @@ public class TestContext{
 	/// Valeurs des declencheurs
 	/// </summary>
 	public Dictionary<string, bool> triggerContext;
-
+	
 	public TestContext(){
 		floatContext = new Dictionary<string, float>();
 		boolContext = new Dictionary<string, bool>();

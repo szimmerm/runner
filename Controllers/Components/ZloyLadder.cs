@@ -5,7 +5,7 @@ public class ZloyLadder : PlayerController {
 
 	public float verticalAcceleration = 1;
 	private float gravity = 1;
-
+	
 	// Use this for initialization
 	void Start () {
 
@@ -16,16 +16,16 @@ public class ZloyLadder : PlayerController {
 		SetDirection();
 	}
 
-	void OnEnable(){
+	protected void OnEnable(){
 		// quand il grimpe, le personnage n'est plus sujet a la gravite et ne se cogne plus aux murs
 		gravity = rigidbody2D.gravityScale;
 		rigidbody2D.gravityScale = 0;
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("player character"), LayerMask.NameToLayer("ground"), true);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("perso"), LayerMask.NameToLayer("ground"), true);
 	}
 
-	void OnDisable(){
+	protected void OnDisable(){
 		rigidbody2D.gravityScale = gravity;
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("player character"), LayerMask.NameToLayer("ground"), false);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("perso"), LayerMask.NameToLayer("ground"), false);
 		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
 	}
 

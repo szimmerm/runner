@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+[RequireComponent (typeof(PlayerValues))]
 /// <summary>
 /// Classe generique regissant les mouvements du personnage controlle par le joueur
 /// </summary>
 public class PlayerController : GenericMove {
 
-	new protected PlayerValues values; // valeurs internes du personnage (verifier syntaxe et comportement ?)
+	protected PlayerValues pvalues; // valeurs internes du personnage (verifier syntaxe et comportement ?)
 										// on se permet le hiding ici parce que values n'est qu'un cast du values utilise par
 										// controlled component
 
-	void Awake() {
-		values = GetComponent<PlayerValues>();
+	protected override void Awake() {
+		base.Awake ();
+		pvalues = GetComponent<PlayerValues>();
+		values = pvalues;
 	}
 
 	/// <summary>
@@ -19,10 +23,10 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	public void ApplyHorizontalMove(){
 		if (values.direction != 0){
-			AccelerateWithCap(values.acceleration, values.maxSpeed);
+			AccelerateWithCap(pvalues.acceleration, pvalues.maxSpeed);
 		}
 		else{
-			DecreaseSpeed(values.horizontalFriction);
+			DecreaseSpeed(pvalues.horizontalFriction);
 		}
 		UpdateAnimator();
 	}
@@ -42,7 +46,7 @@ public class PlayerController : GenericMove {
 	public bool IsOnGround() {
 		RaycastHit2D hit = Physics2D.Linecast (
 			transform.position 	
-			,values.groundTrigger.transform.position
+			,pvalues.GetGroundTrigger().transform.position
 			, 1 << LayerMask.NameToLayer("ground") 
 		);
 		if(hit.collider != null) return true;
@@ -53,7 +57,7 @@ public class PlayerController : GenericMove {
 	/// Met a jour la valeur du sol
 	/// </summary>
 	protected void UpdateGround(){
-		values.onGround = IsOnGround();
+		pvalues.onGround = IsOnGround();
 	}
 
 	protected void SetVertical(){

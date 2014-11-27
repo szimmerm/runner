@@ -13,9 +13,11 @@ public class PlayerValues : ObjectValues {
 	public bool onGround = false; // objet au sol ?
 	public bool climbing = false; // objet grimpant ? (utile ? devrait etre integre a l'automate d'etat)
 
-	public Transform groundTriggerPrefab;
+	public Transform groundTriggerPrefab; // qui instancier comme detecteur de sol
 
+	// le detecteur de sol, cree au lancement du jeu
 	private Transform groundTrigger;
+	public Collider2D groundCollider; // element sur lequel marche le personnage
 
 	void Awake() {
 		groundTrigger = (Transform)Instantiate (groundTriggerPrefab);	

@@ -49,7 +49,10 @@ public class PlayerController : GenericMove {
 			,pvalues.GetGroundTrigger().transform.position
 			, 1 << LayerMask.NameToLayer("ground") 
 		);
-		if(hit.collider != null) return true;
+		if (hit.collider != null) {
+			pvalues.groundCollider = hit.collider;
+			return true;
+		}
 		else return false;
 	}
 

@@ -2,9 +2,6 @@
 
 Général :
 - commenter le code
-- faire un seul module qui contient les primitives génériques pour gérer le déplacement d'un objet
----> ameliorer generichorizontalmove pour qu'il serve a ca
-- trouver d'ou vient DisableHorizontalMove et le supprimer pour remonter tout sur le module precedent
 
 Fonctionnalités à ajouter :
 - faire des échelles montables : EN COURS
@@ -19,7 +16,7 @@ Fonctionnalités à ajouter :
 
 Optimisation et modifications :
 - créer des pools d'objets pour éviter les générations à la volée
-- modifier le script des plateformes pour le rendre viable
+- modifier le script des plateformes pour le rendre viable -> possible maintenant avec la fonction IgnoreCollision entre deux objets
 
 Trucs faits :
 - afficher les zones de tiling : DONE

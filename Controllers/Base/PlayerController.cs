@@ -44,23 +44,31 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	/// <returns><c>true</c>, si le personnage est au sol, <c>false</c> sinon.</returns>
 	public bool IsOnGround() {
-		RaycastHit2D hit = Physics2D.Linecast (
+		RaycastHit2D [] hits = Physics2D.LinecastAll (
 			transform.position 	
 			,pvalues.GetGroundTrigger().transform.position
 			, 1 << LayerMask.NameToLayer("ground") 
 		);
-		if (hit.collider != null) {
-			pvalues.groundCollider = hit.collider;
-			return true;
+		foreach(RaycastHit2D hit in hits){
+			if (hit.collider != null) {
+				if (!Physics2D.GetIgnoreCollision(collider2D, hit.collider)) {
+					pvalues.groundCollider = hit.collider;
+					return true;
+				}
+			}
 		}
-		else return false;
+		return false;
 	}
 
 	/// <summary>
 	/// Met a jour la valeur du sol
 	/// </summary>
 	protected void UpdateGround(){
-		pvalues.onGround = IsOnGround();
+		// on ne met la vraie valeur que si l'objet n'est pas entrain de monter, cause de la gestion des plateformes
+		if (rigidbody2D.velocity.y <= 0)
+			pvalues.onGround = IsOnGround();
+		else
+			pvalues.onGround = false;
 	}
 
 	protected void SetVertical(){

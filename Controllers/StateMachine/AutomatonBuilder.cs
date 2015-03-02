@@ -7,14 +7,19 @@ using System.Collections.Generic;
 /// Classe de base fabriquant automatiquement l'automate de controle d'un element a partir de sa description
 /// </summary>
 public class AutomatonBuilder : MonoBehaviour {
+
+	private int counter; // compteur pour generer les identificateur des etats de maniere unique ; necessaire pour indiquer l'etat courant a l'animator
+	private List<string> stateList; // liste des etats crees ; utile pour dire dans quel etat on se trouve a l'animateur
 		
 	public string activeStateName = "";
+	public string automatonName = "";
 
 	private StateManager<BaseState, Transition> controller; // character controller
 	public TestContext context; // valeurs utilisees dans les tests par les transitions
 	private BaseState activeState;
 
 	private Dictionary<string, BaseState> stateNames = new Dictionary<string, BaseState>(); // dictionnaire faisant le lien entre les noms d'etats et les etats
+//	private Animator animator;
 
 	// Methodes a remplir par la classe fille
 	
@@ -56,6 +61,7 @@ public class AutomatonBuilder : MonoBehaviour {
 		EnablingState state = new EnablingState(name, context, controller);
 		stateNames.Add (name, state);
 		state.AddComponent (stateContent);
+		stateList.Add (state.name);
 	}
 
 	/// <summary>
@@ -101,6 +107,8 @@ public class AutomatonBuilder : MonoBehaviour {
 
 	// Infrastructure de l'automate en tant que MonoBehaviour
 	void Awake(){
+		// creation de la liste d'etats
+		stateList = new List<string>();
 
 		// machine creation
 		controller = new StateManager<BaseState, Transition>();
@@ -116,7 +124,10 @@ public class AutomatonBuilder : MonoBehaviour {
 
 		// creation des valeurs par defaut du contexte
 		BuildContext (context);
-	}
+
+		// mise en place de l'animateur si il y a lieu
+//		animator = (Animator) GetComponent<Animator>();
+	} 	
 	
 	// Use this for initialization
 	void Start () {
@@ -129,6 +140,7 @@ public class AutomatonBuilder : MonoBehaviour {
 		//		Debug.Log ("xVelocity : "+context.GetFloat ("xVelocity"));
 		activeState = activeState.StateUpdate();
 		activeStateName = activeState.name;
+//		animator.SetInteger(automatonName, stateList.IndexOf (activeState.name)); // on indique a l'animator l'etat courant
 	}
 }
 	

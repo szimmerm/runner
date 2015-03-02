@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+[RequireComponent (typeof(Animator))]
 
 [System.Serializable]
 /// <summary>
@@ -12,17 +15,24 @@ public class PlayerValues : ObjectValues {
 	public float horizontalFriction = 20f; // ralentissement de l'objet lorsqu'on ne touche a rien
 	public bool onGround = false; // objet au sol ?
 	public bool climbing = false; // objet grimpant ? (utile ? devrait etre integre a l'automate d'etat)
+	public bool isFiring = false; // objet entrain de tirer ?
 
 	public Transform groundTriggerPrefab; // qui instancier comme detecteur de sol
 
 	// le detecteur de sol, cree au lancement du jeu
+	public Vector2 groundColliderDistance;
 	private Transform groundTrigger;
 	public Collider2D groundCollider; // element sur lequel marche le personnage
 
-	void Awake() {
+	private List<Animator> animators;
+
+	protected override void Awake() {
+		base.Awake();
 		groundTrigger = (Transform)Instantiate (groundTriggerPrefab);	
 		groundTrigger.parent = transform;
-		groundTrigger.localPosition = new Vector3 (0f, -0.75f, 0f);
+		groundTrigger.localPosition = groundColliderDistance;
+		animators = new List<Animator>(GetComponentsInChildren<Animator>());
+		animators.Add (animator);
 	}
 
 	public Transform GetGroundTrigger(){
@@ -46,6 +56,35 @@ public class PlayerValues : ObjectValues {
 		} else if (other.tag == "ladderTop") {
 			float ladders = context.GetFloat ("ladderTopValue") - 1;
 			context.SetFloat ("ladderTopValue", ladders);
+		}
+	}
+
+	private void resetTriggers() {
+		isFiring = false;
+	}
+
+	void Update() {
+		resetTriggers();
+	}
+
+	void LateUpdate(){
+		AnimatorConstantUpdate();
+	}
+
+	void AnimatorConstantUpdate(){
+		Vector3 velocity = rigidbody2D.velocity;
+		foreach (Animator anim in animators) {
+			anim.SetFloat ("xVelocity", velocity.x);
+			anim.SetFloat ("yVelocity", velocity.y);
+			// on ne modifie onGround que si on ne monte pas pour eviter
+			// les multiples sauts lors de l'ascension
+		}
+		if (rigidbody2D.velocity.y >= 0) {
+			context.SetBool ("onGround", onGround);
+			foreach(Animator anim in animators) {
+				anim.SetBool ("onGround", onGround);
+				anim.SetBool ("isFiring", isFiring);
+			}
 		}
 	}
 }

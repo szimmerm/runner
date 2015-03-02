@@ -14,9 +14,10 @@ public class PlatformScript : MonoBehaviour {
 	
 	}
 
-
 	void OnCollisionEnter2D(Collision2D collision){
-		if (collision.collider.tag == "Player" && collision.relativeVelocity.y <= 0) {
+		Vector2 normal = collision.contacts[0].normal;
+		Debug.Log("collision normal : "+normal);
+		if (collision.collider.tag == "Player" && collision.contacts[0].normal.y >= 0) {
 			Debug.Log ("relative velocity : "+collision.relativeVelocity);
 			Physics2D.IgnoreCollision(collision.collider, collider2D, true);
 			Debug.Log ("enter");

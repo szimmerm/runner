@@ -13,6 +13,7 @@ public class StateManager<State, Transition>{
 	protected Dictionary<State, Dictionary<Transition, State>> transitions;
 
 	public State currentState{ get; set;}
+	public string name;
 
 	public StateManager(){
 		states = new HashSet<State>();

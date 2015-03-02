@@ -33,6 +33,7 @@ public class ZloyGround : PlayerController {
 		// gestion de la hauteur du saut
 		float jump = Input.GetAxis ("Jump");
 		if(pvalues.onGround && jump != 0){
+			Debug.Log ("chump");
 			JumpImpulse(jumpImpulse);
 		}
 		values.context.SetBool ("onGround", pvalues.onGround);

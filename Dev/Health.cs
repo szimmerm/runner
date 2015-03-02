@@ -4,6 +4,7 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
 	public int hitPoints = 4;
+	public AudioClip deathSound;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,10 @@ public class Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		Debug.Log ("nik mer");
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
@@ -25,6 +30,7 @@ public class Health : MonoBehaviour {
 	}
 
 	void Die(){
+		AudioSource.PlayClipAtPoint(deathSound, transform.position);
 		Destroy(gameObject);
 	}
 }

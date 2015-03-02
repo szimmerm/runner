@@ -37,6 +37,7 @@ public class BaseState{
 	/// </summary>
 	public string name;
 
+
 	public BaseState(string nam, TestContext ctxt, StateManager<BaseState, Transition> control){
 		name = nam;
 		context = ctxt;
@@ -211,7 +212,8 @@ public class EnablingState : BaseState{
 	/// </summary>
 	public List<MonoBehaviour> components = new List<MonoBehaviour>();
 	
-	public EnablingState(string nam, TestContext ctxt, StateManager<BaseState, Transition> control) : base(nam, ctxt, control){
+	public EnablingState(string nam, TestContext ctxt, StateManager<BaseState, Transition> control) : 
+		base(nam, ctxt, control){
 		components = new List<MonoBehaviour>();
 	}	
 

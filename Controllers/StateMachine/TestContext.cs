@@ -23,11 +23,17 @@ public class TestContext{
 	/// Valeurs des declencheurs
 	/// </summary>
 	public Dictionary<string, bool> triggerContext;
-	
+
+	/// <summary>
+	/// Valeurs des variables de type chaine de caractere
+	/// </summary>
+	public Dictionary<string, string>	 stringContext;
+
 	public TestContext(){
 		floatContext = new Dictionary<string, float>();
 		boolContext = new Dictionary<string, bool>();
 		triggerContext = new Dictionary<string, bool>();
+		stringContext = new Dictionary<string, string>();
 	}
 
 	/// <summary>
@@ -78,6 +84,28 @@ public class TestContext{
 //			Debug.LogError ("float variable not found : "+name);
 			return 0f;
 		}
+	}
+
+	/// <summary>
+	/// Retourne la valeur associee a la variable name
+	/// </summary>
+	/// <returns>Valeur de la variable</returns>
+	/// <param name="name">Nom de la variable</param>
+	public string GetString(string name){
+		try{
+			return stringContext[name];
+		} catch(KeyNotFoundException){
+			return "";
+		}
+	}
+
+	/// <summary>
+	/// Associe la valeur value a la variable name
+	/// </summary>
+	/// <param name="name">nom de la variable.</param>
+	/// <param name="value">valeur de la variable.</param>
+	public void SetString(string name, string value){
+		stringContext[name] = value;
 	}
 
 	/// <summary>

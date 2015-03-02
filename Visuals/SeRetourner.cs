@@ -20,13 +20,23 @@ public class SeRetourner : MonoBehaviour {
 			/* si le sprite a change de direction */
 			if (direction != previousDirection){
 				/* scale update */
-				Vector3 oldScale = transform.localScale;
-				Vector3 newScale = new Vector3(-1*oldScale.x, oldScale.y, oldScale.z);
-				transform.localScale = newScale;
-	
+				ReverseDirection(gameObject);
+
+				// on retourne le pistolage si y a lieu
+
+//				FireScript weapon = GetComponentInChildren<FireScript>();	
+//				if (weapon != null) {
+//					ReverseDirection(weapon.gameObject);
+//				}
 				previousDirection = direction;
 			}
 		}
+	}
+
+	static void ReverseDirection(GameObject obj){
+		Vector3 oldScale = obj.transform.localScale;
+		Vector3 newScale = new Vector3(-1*oldScale.x, oldScale.y, oldScale.z);
+		obj.transform.localScale = newScale;
 	}
 
 	void OnReturn(){

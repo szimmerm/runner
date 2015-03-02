@@ -8,9 +8,7 @@ using System.Collections;
 /// </summary>
 public class PlayerController : GenericMove {
 
-	protected PlayerValues pvalues; // valeurs internes du personnage (verifier syntaxe et comportement ?)
-										// on se permet le hiding ici parce que values n'est qu'un cast du values utilise par
-										// controlled component
+	protected PlayerValues pvalues; // valeurs internes du personnage, etend object values
 
 	protected override void Awake() {
 		base.Awake ();
@@ -28,7 +26,6 @@ public class PlayerController : GenericMove {
 		else{
 			DecreaseSpeed(pvalues.horizontalFriction);
 		}
-		UpdateAnimator();
 	}
 
 	/// <summary>
@@ -65,10 +62,16 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	protected void UpdateGround(){
 		// on ne met la vraie valeur que si l'objet n'est pas entrain de monter, cause de la gestion des plateformes
-		if (rigidbody2D.velocity.y <= 0)
+		if (rigidbody2D.velocity.y <= 0) {
 			pvalues.onGround = IsOnGround();
-		else
+		} else {
 			pvalues.onGround = false;
+		}
+		/*
+		pvalues.animator.SetBool ("grounded", pvalues.onGround);
+		pvalues.context.SetBool ("onGround", pvalues.onGround);
+		Debug.Log ("updating ground : "+pvalues.onGround);
+		*/
 	}
 
 	protected void SetVertical(){

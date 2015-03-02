@@ -9,6 +9,8 @@ using System.Collections;
 /// </summary>
 public class GenericMove : ControlledComponent {
 
+	protected Animator animator;
+
 	/// <summary>
 	/// Fait accelerer un rigidbody en fixant une vitesse maximale.
 	/// </summary>
@@ -34,10 +36,6 @@ public class GenericMove : ControlledComponent {
 			newSpeed = Mathf.Min (0, previousSpeed + decreaseValue);
 		}
 		rigidbody2D.velocity = new Vector2(newSpeed, rigidbody2D.velocity.y);
-	}
-
-	public void UpdateAnimator(){
-//		animator.SetFloat ("horizontal speed", rigidbody2D.velocity.x);
 	}
 
 	/// <summary>

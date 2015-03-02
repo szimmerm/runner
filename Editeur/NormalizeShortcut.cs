@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
@@ -43,3 +44,4 @@ public class NormalizeShortcut : MonoBehaviour {
 		obj.transform.localScale = new Vector3(xScale, yScale, obj.transform.localScale.z);
 	}
 }
+#endif

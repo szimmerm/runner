@@ -28,8 +28,9 @@ public class AirZloy : PlayerController {
 		
 		// gestion de la hauteur du saut
 		float jump = Input.GetAxis ("Jump");
-		if (!pvalues.onGround && Interval.InInterval (jump, deadZone))
+		if (!pvalues.onGround && Interval.InInterval (jump, deadZone)) {
 			CapJumpSpeed(jumpCap);
+		}
 
 	}
 	

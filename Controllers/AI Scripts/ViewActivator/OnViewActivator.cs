@@ -15,7 +15,7 @@ public class OnViewActivator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!wasVisible && renderer.isVisible){
+		if(!wasVisible && GetComponent<Renderer>().isVisible){
 			wasVisible = true;
 			for(int i=0 ; i<scripts.Length ; i++){
 				scripts[i].Activate();

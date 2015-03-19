@@ -27,7 +27,7 @@ public class LadderScript : MonoBehaviour {
 		Transform trigger = (Transform) Instantiate(Trigger);
 		trigger.position = transform.position;
 		BoxCollider2D box = trigger.GetComponent<BoxCollider2D>();
-		box.center = new Vector2(offset, 0f);
+		box.offset = new Vector2(offset, 0f);
 		box.size = boxSize;
 		box.tag = "ladderTrigger";
 		box.transform.parent = transform;
@@ -39,7 +39,7 @@ public class LadderScript : MonoBehaviour {
 		Transform trigger = (Transform) Instantiate(Trigger);
 		trigger.position = transform.position;
 		BoxCollider2D box = trigger.GetComponent<BoxCollider2D>();
-		box.center = ((Vector2)transform.localScale)/2 + offset;
+		box.offset = ((Vector2)transform.localScale)/2 + offset;
 		box.size = boxSize;
 		box.tag = "ladderTop";
 		box.transform.parent = transform;

@@ -6,7 +6,7 @@ public class SimpleActivator : AbstractActivationScript {
 
 	public override void Activate(){
 		aiScript.enabled = true;
-		gameObject.rigidbody2D.isKinematic = false; 
+		gameObject.GetComponent<Rigidbody2D>().isKinematic = false; 
 	}
 	
 	public override void Desactivate(){

@@ -9,7 +9,7 @@ public class ControlledComponent : MonoBehaviour {
 	/// <summary>
 	/// valeurs internes de l'objet controle
 	/// </summary>
-	protected ObjectValues values;
+	public ObjectValues values;
 	
 	virtual protected void Awake() {
 		values = GetComponent<ObjectValues>();
@@ -20,6 +20,7 @@ public class ControlledComponent : MonoBehaviour {
 	void Start () {
 //		machine.AddState (this);
 	}
+
 /*
 	public void DoTransition(string s){
 		if (controller != null){

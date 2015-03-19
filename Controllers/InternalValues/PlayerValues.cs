@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent (typeof(Animator))]
-
 [System.Serializable]
 /// <summary>
 /// Valeurs internes du personnage. On utilise une classe separee pour qu'elles soient communes a tout les composants du personnage
@@ -32,7 +30,6 @@ public class PlayerValues : ObjectValues {
 		groundTrigger.parent = transform;
 		groundTrigger.localPosition = groundColliderDistance;
 		animators = new List<Animator>(GetComponentsInChildren<Animator>());
-		animators.Add (animator);
 	}
 
 	public Transform GetGroundTrigger(){
@@ -72,14 +69,14 @@ public class PlayerValues : ObjectValues {
 	}
 
 	void AnimatorConstantUpdate(){
-		Vector3 velocity = rigidbody2D.velocity;
+		Vector3 velocity = GetComponent<Rigidbody2D>().velocity;
 		foreach (Animator anim in animators) {
 			anim.SetFloat ("xVelocity", velocity.x);
 			anim.SetFloat ("yVelocity", velocity.y);
 			// on ne modifie onGround que si on ne monte pas pour eviter
 			// les multiples sauts lors de l'ascension
 		}
-		if (rigidbody2D.velocity.y >= 0) {
+		if (GetComponent<Rigidbody2D>().velocity.y >= 0) {
 			context.SetBool ("onGround", onGround);
 			foreach(Animator anim in animators) {
 				anim.SetBool ("onGround", onGround);

@@ -33,7 +33,7 @@ public class Grenade : MonoBehaviour {
 		// calcul de l'impulsion
 		Vector2 diff = (Vector2)goal - (Vector2)transform.position;
 		float ySpeed = (diff.y / diff.x) * speed.x - Physics.gravity.y * diff.x / (speed.x * 2);
-		grenade.rigidbody2D.velocity = new Vector2(speed.x, ySpeed);
+		grenade.GetComponent<Rigidbody2D>().velocity = new Vector2(speed.x, ySpeed);
 	}
 
 	/// <summary>
@@ -50,6 +50,6 @@ public class Grenade : MonoBehaviour {
 	void ThrowGrenade() {
 		Transform grenade = (Transform) Instantiate(grenadePrefab);
 		grenade.position = transform.position;
-		grenade.rigidbody2D.velocity = new Vector2(speed.x, speed.y);
+		grenade.GetComponent<Rigidbody2D>().velocity = new Vector2(speed.x, speed.y);
 	}
 }

@@ -9,17 +9,23 @@ using System.Collections;
 /// </summary>
 public class GenericMove : ControlledComponent {
 
-	protected Animator animator;
 
 	/// <summary>
 	/// Fait accelerer un rigidbody en fixant une vitesse maximale.
 	/// </summary>
 	/// <param name="acceleration">Acceleration.</param>
 	/// <param name="cap">valeur absolue de la vitesse maximale.</param>
-	public void AccelerateWithCap(float acceleration, float cap){
-		float previousSpeed = rigidbody2D.velocity.x;
-		float newSpeed = Interval.PutInInterval (previousSpeed + (values.direction*acceleration), cap);
-		rigidbody2D.velocity = new Vector2(newSpeed, rigidbody2D.velocity.y);
+	public void AccelerateWithCap(float xAcceleration, float yAcceleration, float xCap, float yCap){
+		Vector2 previousSpeed = values.body.velocity;
+		float newXSpeed = Interval.PutInInterval (previousSpeed.x + (values.direction.x*xAcceleration), xCap);
+		float newYSpeed = Interval.PutInInterval (previousSpeed.y + (values.direction.y*yAcceleration), yCap);
+		values.body.velocity = new Vector2(newXSpeed, newYSpeed);
+	}
+
+	public void AccelerateWithCap(float xAcceleration, float xCap){
+		Vector2 previousSpeed = values.body.velocity;
+		float newXSpeed = Interval.PutInInterval (previousSpeed.x + (values.direction.x*xAcceleration), xCap);
+		values.body.velocity = new Vector2(newXSpeed, previousSpeed.y);
 	}
 
 	/// <summary>
@@ -27,7 +33,7 @@ public class GenericMove : ControlledComponent {
 	/// </summary>
 	/// <param name="decreaseValue">Ralentissement applique.</param>
 	public void DecreaseSpeed(float decreaseValue){
-		float previousSpeed = rigidbody2D.velocity.x;
+		float previousSpeed = values.body.velocity.x;
 		float newSpeed;
 		if(Mathf.Sign (previousSpeed) > 0){	
 			newSpeed = Mathf.Max(0, previousSpeed - decreaseValue);
@@ -35,7 +41,7 @@ public class GenericMove : ControlledComponent {
 		else{
 			newSpeed = Mathf.Min (0, previousSpeed + decreaseValue);
 		}
-		rigidbody2D.velocity = new Vector2(newSpeed, rigidbody2D.velocity.y);
+		values.body.velocity = new Vector2(newSpeed, values.body.velocity.y);
 	}
 
 	/// <summary>
@@ -43,7 +49,7 @@ public class GenericMove : ControlledComponent {
 	/// </summary>
 	/// <param name="force">Force.</param>
 	public void JumpImpulse(float force){
-		rigidbody2D.AddForce (new Vector3(0F, force, 0F));
+		values.body.AddForce (new Vector3(0F, force, 0F));
 	}
 
 	/// <summary>
@@ -51,7 +57,7 @@ public class GenericMove : ControlledComponent {
 	/// </summary>
 	/// <param name="ySpeedCap">Vitesse fixee maximale.</param>
 	public void CapJumpSpeed(float ySpeedCap){
-		float ySpeed = Mathf.Min (ySpeedCap, rigidbody2D.velocity.y);
-		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, ySpeed);
+		float ySpeed = Mathf.Min (ySpeedCap, values.body.velocity.y);
+		values.body.velocity = new Vector2(values.body.velocity.x, ySpeed);
 	}
 }

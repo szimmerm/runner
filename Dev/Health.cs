@@ -1,36 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Health : MonoBehaviour {
+public abstract class Health : MonoBehaviour {
 
 	public int hitPoints = 4;
+	public bool hasCadavre = false;
+
 	public AudioClip deathSound;
+	public AudioClip hitSound;
+
+
+	protected ObjectValues values;
+//	private static bool freezing = false;
 
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	protected virtual void Start () {
+		values = GetComponent<ObjectValues>();
 	}
 
-	void OnCollisionEnter2D(Collision2D other) {
-		Debug.Log ("nik mer");
+	abstract protected void OnHit(Collider2D coll);
+	abstract protected void OnDeath(Collider2D coll);
+
+	protected void PlayHitSound() {
+		if (hitSound != null) {
+			AudioSource.PlayClipAtPoint(hitSound, transform.position);
+		}
+	}
+
+	protected void PlayDeathSound(){
+		if (deathSound != null) {
+			AudioSource.PlayClipAtPoint(deathSound, transform.position);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
-		Debug.Log ("coucoullision !");
 		if(coll.gameObject.tag == "shoots"){
+			Destroy (coll.gameObject); // a modifier pour appeler un Die sur l'objet
 			if (--hitPoints <= 0) {
-				Die();
+				PlayDeathSound();
+				OnDeath(coll);
+			}
+			if (hitPoints > 0) {
+				PlayHitSound();
+				OnHit(coll);
 			}
 		}
 	}
 
-	void Die(){
-		AudioSource.PlayClipAtPoint(deathSound, transform.position);
-		Destroy(gameObject);
-	}
 }

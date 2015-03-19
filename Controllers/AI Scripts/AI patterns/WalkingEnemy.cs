@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WalkingEnemy : MonoBehaviour {
+public class WalkingEnemy : GenericMove {
 
-	public float direction;
+	public Vector2 direction;
 	public float acceleration;
 	public Vector2 maxSpeed;
 
@@ -27,11 +27,11 @@ public class WalkingEnemy : MonoBehaviour {
 		}
 		else {*/
 		// si on se cogne à un mur, on change de direction
-		if (rigidbody2D.velocity.x == 0) {
+		if (GetComponent<Rigidbody2D>().velocity.x == 0) {
 			ChangeDirection();
 		}
 		// on rajoute l'accélération dans la bonne direction
-		Vector2 velocity = rigidbody2D.velocity + new Vector2 (direction*acceleration, 0);
+		Vector2 velocity = GetComponent<Rigidbody2D>().velocity + new Vector2 (direction.x*acceleration, 0);
 	
 		if (velocity.x > maxSpeed.x){
 			//rigidbody2D.velocity.Set(maxSpeed, rigidbody2D.velocity.y);
@@ -41,7 +41,7 @@ public class WalkingEnemy : MonoBehaviour {
 			velocity = new Vector2(-maxSpeed.x, velocity.y);
 		}
 
-		rigidbody2D.velocity = velocity;
+		GetComponent<Rigidbody2D>().velocity = velocity;
 
 	}
 

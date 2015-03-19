@@ -13,7 +13,7 @@ public class SeRetourner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float velocity = rigidbody2D.velocity.x;
+		float velocity = GetComponent<Rigidbody2D>().velocity.x;
 		if(velocity > deadZone || velocity < -deadZone){
 			float direction = Mathf.Sign (velocity);
 	
@@ -34,9 +34,7 @@ public class SeRetourner : MonoBehaviour {
 	}
 
 	static void ReverseDirection(GameObject obj){
-		Vector3 oldScale = obj.transform.localScale;
-		Vector3 newScale = new Vector3(-1*oldScale.x, oldScale.y, oldScale.z);
-		obj.transform.localScale = newScale;
+		obj.transform.Rotate (new Vector3(0, 180, 0));
 	}
 
 	void OnReturn(){

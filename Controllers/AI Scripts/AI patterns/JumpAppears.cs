@@ -13,7 +13,7 @@ public class JumpAppears : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		moveScript.enabled = false;
-		rigidbody2D.AddForce (new Vector2(0, height));
+		GetComponent<Rigidbody2D>().AddForce (new Vector2(0, height));
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class JumpAppears : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		float velocity = rigidbody2D.velocity.y;
+		float velocity = GetComponent<Rigidbody2D>().velocity.y;
 		if (!descending && velocity < 0){
 			descending = true;
 			gameObject.layer = 20;

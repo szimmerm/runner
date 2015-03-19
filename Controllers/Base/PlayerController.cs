@@ -3,6 +3,7 @@ using System.Collections;
 
 
 [RequireComponent (typeof(PlayerValues))]
+[RequireComponent (typeof(SeRetourner))]
 /// <summary>
 /// Classe generique regissant les mouvements du personnage controlle par le joueur
 /// </summary>
@@ -20,8 +21,8 @@ public class PlayerController : GenericMove {
 	/// Resolution du mouvement horizontal
 	/// </summary>
 	public void ApplyHorizontalMove(){
-		if (values.direction != 0){
-			AccelerateWithCap(pvalues.acceleration, pvalues.maxSpeed);
+		if (values.direction.x != 0){
+			AccelerateWithCap(pvalues.acceleration, 0, pvalues.maxSpeed, 100000000000000000);
 		}
 		else{
 			DecreaseSpeed(pvalues.horizontalFriction);
@@ -32,8 +33,9 @@ public class PlayerController : GenericMove {
 	/// Met a jour la valeur de la direction du mouvement
 	/// </summary>
 	public void SetDirection() {
-		values.direction = Input.GetAxis ("Horizontal");	
-		values.context.SetFloat ("direction", values.direction);
+		values.direction = new Vector2(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));	
+//		values.context.SetFloat ("xDirection", values.direction.x);
+//		values.context.SetFloat ("yDirection", values.direction.y);
 	}
 
 	/// <summary>
@@ -44,11 +46,11 @@ public class PlayerController : GenericMove {
 		RaycastHit2D [] hits = Physics2D.LinecastAll (
 			transform.position 	
 			,pvalues.GetGroundTrigger().transform.position
-			, 1 << LayerMask.NameToLayer("ground") 
+			, 1 << LayerMask.NameToLayer("Walls") 
 		);
 		foreach(RaycastHit2D hit in hits){
 			if (hit.collider != null) {
-				if (!Physics2D.GetIgnoreCollision(collider2D, hit.collider)) {
+				if (!Physics2D.GetIgnoreCollision(GetComponent<Collider2D>(), hit.collider)) {
 					pvalues.groundCollider = hit.collider;
 					return true;
 				}
@@ -62,7 +64,7 @@ public class PlayerController : GenericMove {
 	/// </summary>
 	protected void UpdateGround(){
 		// on ne met la vraie valeur que si l'objet n'est pas entrain de monter, cause de la gestion des plateformes
-		if (rigidbody2D.velocity.y <= 0) {
+		if (GetComponent<Rigidbody2D>().velocity.y <= 0) {
 			pvalues.onGround = IsOnGround();
 		} else {
 			pvalues.onGround = false;

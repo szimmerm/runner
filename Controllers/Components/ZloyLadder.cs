@@ -18,29 +18,31 @@ public class ZloyLadder : PlayerController {
 
 	protected void OnEnable(){
 		// quand il grimpe, le personnage n'est plus sujet a la gravite et ne se cogne plus aux murs
-		gravity = rigidbody2D.gravityScale;
-		rigidbody2D.gravityScale = 0;
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("perso"), LayerMask.NameToLayer("ground"), true);
+		gravity = GetComponent<Rigidbody2D>().gravityScale;
+		GetComponent<Rigidbody2D>().gravityScale = 0;
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Players"), LayerMask.NameToLayer("Walls"), true);
 	}
 
 	protected void OnDisable(){
-		rigidbody2D.gravityScale = gravity;
-		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("perso"), LayerMask.NameToLayer("ground"), false);
-		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
+		GetComponent<Rigidbody2D>().gravityScale = gravity;
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Players"), LayerMask.NameToLayer("Walls"), false);
+		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0);
 	}
 
 	void FixedUpdate(){
+/*
 		float trueDirection = values.direction;
 
 		// on triche un peu pour simuler le mouvement vertical ; on utilise un mouvement horizontal renverse
 		values.direction = Input.GetAxis ("Vertical");	
 		if (values.direction !=0) {
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.y, 0);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0);
 			ApplyHorizontalMove();
-			rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.x);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.x);
 		}
-		else rigidbody2D.velocity = new Vector2(0, 0);
+		else GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
 		values.direction = trueDirection;
+*/
 	}
 }

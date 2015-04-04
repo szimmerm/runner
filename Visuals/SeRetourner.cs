@@ -35,7 +35,6 @@ public class SeRetourner : MonoBehaviour {
 	}
 
 	public void Flip(){
-		Debug.Log ("flip !");
 		SeRetourner.ReverseDirectionOfObject(this.gameObject);
 	}
 

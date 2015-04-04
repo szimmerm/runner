@@ -38,6 +38,8 @@ public class FireScript : MonoBehaviour {
 
 	public Transform shell;
 
+	public Vector2 screenShake;
+
 	// Use this for initialization
 	void Start () {
 		parentDirection = (SeRetourner) GetComponentInParent<SeRetourner>();
@@ -63,18 +65,15 @@ public class FireScript : MonoBehaviour {
 
 	private Transform BuildBullet() {
 		Transform bul = (Transform) Instantiate(bullet, Utils.PutNoiseOnVector(transform.position, new Vector3(0, dispersionHeight, 0)), Quaternion.identity);
-
-		//		bul.transform.Rotate (getDispersionAngle());
-		AITools bulletController = (AITools) bul.GetComponent<AITools>();
-		
-		bulletController.aiScript = null;
-
 		if (parentValues.transform.localScale.x < 0) {
 			SeRetourner.ReverseDirectionOfObject (bul.gameObject);
 		}
+
+		AITools bulletController = (AITools) bul.GetComponent<AITools>();		
+		bulletController.aiScript = null;
 		bulletController.MoveForward ();
-//		bulletController.values.direction = (parentValues.direction.x > 0) ? -transform.right : transform.right;
 		AudioSource.PlayClipAtPoint(shootSound, transform.position);
+
 		return bul;
 	}
 
@@ -93,7 +92,7 @@ public class FireScript : MonoBehaviour {
 	/// Instancie le tir
 	/// </summary>
 	private IEnumerator SpawnShoot() {
-		GetComponentInParent<ObjectValues>().controller.AddRumble(new Vector2(1f, 1f));
+		GetComponentInParent<ObjectValues>().controller.AddRumble(screenShake);
 		canFire = false;
 		// duree de vie du tir
 		Transform shoot = BuildBullet();

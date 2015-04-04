@@ -14,16 +14,16 @@ public class ShellScript : MonoBehaviour {
 	IEnumerator FreezeIfStopped(){
 		testing = true;
 		yield return new WaitForSeconds(0.02f);
-		if (body.velocity.y < 0.01 && body.velocity.y > -0.01) {
+		if (body.velocity.y < 1 && body.velocity.y > -1) {
 			body.isKinematic = true;
-			Debug.Log ("zzzz");
 			this.enabled = false;
+			Debug.Log ("zzzz");
 		}
 		testing = false;
 	}
 
 	void FixedUpdate() {
-		if (!testing && body.velocity.y < 0.01 && body.velocity.y > -0.01) {
+		if (!testing && body.velocity.y < 1 && body.velocity.y > -1) {
 			StartCoroutine(FreezeIfStopped());
 		}
 	}

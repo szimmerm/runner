@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public class SeRetourner : MonoBehaviour {
@@ -20,7 +21,7 @@ public class SeRetourner : MonoBehaviour {
 			/* si le sprite a change de direction */
 			if (direction != previousDirection){
 				/* scale update */
-				ReverseDirection(gameObject);
+				Flip();
 
 				// on retourne le pistolage si y a lieu
 
@@ -33,8 +34,15 @@ public class SeRetourner : MonoBehaviour {
 		}
 	}
 
-	static void ReverseDirection(GameObject obj){
-		obj.transform.Rotate (new Vector3(0, 180, 0));
+	public void Flip(){
+		Debug.Log ("flip !");
+		SeRetourner.ReverseDirectionOfObject(this.gameObject);
+	}
+
+	public static void ReverseDirectionOfObject(GameObject obj){
+//		obj.transform.Rotate (new Vector3(0, 180, 0));
+		Vector3 scale = obj.transform.localScale;
+		obj.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
 	}
 
 	void OnReturn(){

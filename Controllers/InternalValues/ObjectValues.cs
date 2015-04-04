@@ -19,4 +19,6 @@ public class ObjectValues : MonoBehaviour {
 		body = (Rigidbody2D) GetComponent<Rigidbody2D>();
 		controller = (GameManager) GameObject.Find("Game Manager").GetComponent<GameManager>();
 	}
+
+	
 }

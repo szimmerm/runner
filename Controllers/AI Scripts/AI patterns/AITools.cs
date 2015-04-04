@@ -59,6 +59,10 @@ public class AITools : GenericMove {
 		JumpImpulse(jumpForce);
 	}
 
+	public void MoveForward() {
+		values.direction = new Vector2((transform.localScale.x > 0) ? 1 : -1, values.direction.y);
+	}
+
 	/// <summary>
 	/// Makes the enemy move in the direction of a point
 	/// </summary>
